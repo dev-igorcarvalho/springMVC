@@ -34,7 +34,8 @@ public class ProdutosController {
     public ModelAndView gravar(ProdutoModel produto, RedirectAttributes redirectAttributes) {
         System.out.println(produto);
         produtoDAO.save(produto);
-        // pendura um objeto na requisição e passa ele para a proxima encadeada
+        // pendura um objeto na requisição e passa ele para a proxima encadeada.
+        //RedirectAttributes é um escopo onde os objetos adicionados duram apenas o tempo de um request para outro.
         redirectAttributes.addFlashAttribute("sucesso", "Produto cadastro com sucesso");
         // o redirect: faz a chamada do metodo mapeado na url do mesmo nome
         return new ModelAndView("redirect:produtos/listar");
