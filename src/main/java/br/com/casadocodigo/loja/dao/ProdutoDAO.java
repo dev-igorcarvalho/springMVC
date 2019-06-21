@@ -15,13 +15,13 @@ public class ProdutoDAO extends AbstractDAO<ProdutoModel> {
 
     @Override
     public void save(ProdutoModel produto) {
-        LOG.info("Save ProdutoDao");
+        LOG.info( "\n" + "Save ProdutoDao");
         super.save(produto);
     }
 
     @Override
     public List<ProdutoModel> findAll() {
-        LOG.info("FindAll ProdutoDao");
+        LOG.info("\n" + "FindAll ProdutoDao");
         return super.findAll();
     }
 }
