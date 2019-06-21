@@ -38,6 +38,7 @@ public class ProdutosController {
         //RedirectAttributes é um escopo onde os objetos adicionados duram apenas o tempo de um request para outro.
         redirectAttributes.addFlashAttribute("sucesso", "Produto cadastro com sucesso");
         // o redirect: faz a chamada do metodo mapeado na url do mesmo nome
+        // também é boa pratica usar isso para evitar q o usuario repita o ultimo request post dando refresh no navegador
         return new ModelAndView("redirect:produtos/listar");
     }
 
