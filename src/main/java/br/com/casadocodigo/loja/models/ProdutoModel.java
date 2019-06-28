@@ -20,7 +20,7 @@ public class ProdutoModel extends AbstractModel {
     private String descricao;
 
     @Column(name = "paginas")
-    private int paginas;
+    private Integer paginas;
     
     @ElementCollection
     private List<PrecoModel> precos;
@@ -45,7 +45,7 @@ public class ProdutoModel extends AbstractModel {
         return paginas;
     }
 
-    public void setPaginas(int paginas) {
+    public void setPaginas(Integer paginas) {
         this.paginas = paginas;
     }
 

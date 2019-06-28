@@ -7,8 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.casadocodigo.loja.dao.ProdutoDAO;
 import br.com.casadocodigo.loja.models.ProdutoModel;
 import br.com.casadocodigo.loja.models.enums.TipoPrecoEnum;
+import br.com.casadocodigo.loja.validators.ProdutoValidator;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -22,6 +27,11 @@ public class ProdutosController {
     @Autowired
     private ProdutoDAO produtoDAO;
 
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.addValidators(new ProdutoValidator());
+    }
+
     @RequestMapping("/cadastroForm")
     public ModelAndView form() {
         //ModelAndView é a classe responsavel por disponibilizar o objeto para a View
@@ -30,9 +40,16 @@ public class ProdutosController {
         return modelAndView;
     }
 
+    
+    
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView gravar(ProdutoModel produto, RedirectAttributes redirectAttributes) {
+    public ModelAndView gravar(@Valid ProdutoModel produto,  BindingResult result, RedirectAttributes redirectAttributes) {
         System.out.println(produto);
+        
+        //se tiver erros de validação devolve o usuario para o form
+        if(result.hasErrors()){
+            return this.form();
+        }
         produtoDAO.save(produto);
         // pendura um objeto na requisição e passa ele para a proxima encadeada.
         //RedirectAttributes é um escopo onde os objetos adicionados duram apenas o tempo de um request para outro.
