@@ -1,17 +1,22 @@
 package br.com.casadocodigo.loja.models;
 
 import br.com.casadocodigo.loja.models.abstracts.AbstractModel;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "PRODUTO")
 public class ProdutoModel extends AbstractModel {
 
     private static final long serialVersionUID = -7693345440587953319L;
+    
+    @DateTimeFormat
+    private Calendar dataLancamento;
 
     @Column(name = "titulo")
     private String titulo;

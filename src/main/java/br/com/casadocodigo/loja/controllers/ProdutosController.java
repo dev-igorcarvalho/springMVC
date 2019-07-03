@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("produtos")
+@RequestMapping("/produtos")
 public class ProdutosController {
 
     private static final Logger LOG = Logger.getLogger(ProdutosController.class.getName());
@@ -27,6 +27,7 @@ public class ProdutosController {
     @Autowired
     private ProdutoDAO produtoDAO;
 
+    /*liga o controler ao validator escolhido*/
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.addValidators(new ProdutoValidator());
@@ -42,6 +43,9 @@ public class ProdutosController {
 
     
     
+    /*@Valid vem do beanValidataion do javax.validation, usando o implementação do hibernate.
+    BindingResult carrega os possiveis erros de validação, e para funcionar ele deve ser passado como parametro logo após
+    o model q recebeu o @valid, deve ser mantida a ordem dos parametros que é usada neste exemplo*/
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView gravar(@Valid ProdutoModel produto,  BindingResult result, RedirectAttributes redirectAttributes) {
         System.out.println(produto);
