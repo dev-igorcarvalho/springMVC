@@ -15,11 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public abstract class AbstractDAO<T extends IModel> {
 
-
     @PersistenceContext
     private EntityManager entityManager;
-    
-    
+
     //bruxaria do reflections
     @SuppressWarnings({"unchecked"})
     public Class<T> getPersistenceClazz() {
@@ -46,8 +44,8 @@ public abstract class AbstractDAO<T extends IModel> {
         List<T> result = query.getResultList();
         return result;
     }
-    
-     public List<T> findAll() {
+
+    public List<T> findAll() {
         try {
             return findAll(getPersistenceClazz());
         } catch (Exception e) {
@@ -56,5 +54,12 @@ public abstract class AbstractDAO<T extends IModel> {
         }
     }
 
+    public T find(Class<T> clazz, Object id) {
+        return this.entityManager.find(clazz, id);
+    }
+
+    public T findById(Long id) {
+        return this.entityManager.find(getPersistenceClazz(), id);
+    }
 
 }

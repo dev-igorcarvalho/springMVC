@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,7 +28,7 @@ public class ProdutoModel extends AbstractModel {
     @Column(name = "paginas")
     private Integer paginas;
     
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<PrecoModel> precos;
 
     public String getTitulo() {
@@ -65,7 +66,7 @@ public class ProdutoModel extends AbstractModel {
 
     @Override
     public String toString() {
-        return "Produto [titulo=" + titulo + ", descricao=" + descricao + ", paginas=" + paginas + "]";
+        return "Produto [titulo=" + titulo + ", descricao=" + descricao + ", paginas=" + paginas + ", preço=" + getPrecos().get(0).getPreco() + "]";
     }
 
 }

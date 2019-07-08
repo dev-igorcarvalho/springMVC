@@ -15,7 +15,7 @@ public class ProdutoDAO extends AbstractDAO<ProdutoModel> {
 
     @Override
     public void save(ProdutoModel produto) {
-        LOG.info( "\n" + "Save ProdutoDao");
+        LOG.info("\n" + "Save ProdutoDao");
         super.save(produto);
     }
 
@@ -23,5 +23,11 @@ public class ProdutoDAO extends AbstractDAO<ProdutoModel> {
     public List<ProdutoModel> findAll() {
         LOG.info("\n" + "FindAll ProdutoDao");
         return super.findAll();
+    }
+
+    @Override
+    public ProdutoModel findById(Long id) {
+        LOG.info("\n" + "FindById ProdutoDao");
+        return super.findById(id);
     }
 }

@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -41,17 +42,15 @@ public class ProdutosController {
         return modelAndView;
     }
 
-    
-    
     /*@Valid vem do beanValidataion do javax.validation, usando o implementação do hibernate.
     BindingResult carrega os possiveis erros de validação, e para funcionar ele deve ser passado como parametro logo após
     o model q recebeu o @valid, deve ser mantida a ordem dos parametros que é usada neste exemplo*/
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView gravar(@Valid ProdutoModel produto,  BindingResult result, RedirectAttributes redirectAttributes) {
+    public ModelAndView gravar(@Valid ProdutoModel produto, BindingResult result, RedirectAttributes redirectAttributes) {
         System.out.println(produto);
-        
+
         //se tiver erros de validação devolve o usuario para o form
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return this.form();
         }
         produtoDAO.save(produto);
@@ -69,6 +68,19 @@ public class ProdutosController {
         System.out.println(produtos + "\n");
         ModelAndView modelAndView = new ModelAndView("produtos/produtosLista");
         modelAndView.addObject("produtos", produtos);
+        return modelAndView;
+    }
+
+    
+    //{id} traz o valor do id na url, e o @ pathVariable pega esse valor e usa como parametro da função
+    @RequestMapping("/detalhe/{id}")
+    public ModelAndView detalhe(@PathVariable("id") Long id) {
+
+        ProdutoModel produto = produtoDAO.findById(id);
+        System.out.println(produto + "\n");
+        ModelAndView modelAndView = new ModelAndView("/produtos/detalhe");
+        modelAndView.addObject("produto", produto);
+
         return modelAndView;
     }
 }

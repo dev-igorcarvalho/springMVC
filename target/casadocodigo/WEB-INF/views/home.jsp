@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Livros de Java, Android, iPhone, Ruby, PHP e muito mais - Casa do Código</title>
+<title>Testando Srping</title>
 </head>
 <body>
-	<h1>Casa do Código</h1>
-        <a href="/produtos/cadastro">Cadasto</a>
+	<h1>Testando Srping</h1>
+        <a href="/produtos/cadastroForm">Cadastro</a>
 </body>
 </html>
